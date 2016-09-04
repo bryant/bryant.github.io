@@ -27,8 +27,8 @@
         }
         
         .list-item .scene {
-            width: 400px;
-            height: 400px;
+            width: 200px;
+            height: 200px;
         }
     </style>
 </head>
@@ -93,12 +93,14 @@
                 for (var i = 0; i < 3; i += 1) {
                     box[i] -= binsize[i] / 2.0;
                 }
-                scene.add(build_box.apply(null, box));
+                var b = build_box.apply(null, box)
+                scene.add(b);
+                scene.add(new THREE.EdgesHelper(b, b.material.color));
             });
 
-            scene.add(new THREE.Mesh(new THREE.BoxGeometry(binsize[0], binsize[1], binsize[2]), new THREE.MeshNormalMaterial({
-                wireframe: true
-            })));
+            var bin = new THREE.Mesh(new THREE.BoxGeometry(binsize[0],
+                binsize[1], binsize[2]), new THREE.MeshBasicMaterial());
+            scene.add(new THREE.EdgesHelper(bin, "black"));
 
             var light = new THREE.DirectionalLight(0xffffff, 0.5);
             light.position.set(1, 1, 1);
