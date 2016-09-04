@@ -76,11 +76,7 @@
             document.getElementById("content").appendChild(element);
 
             var camera = new THREE.PerspectiveCamera(50, 1, 1, 10000);
-            camera.position.z = Math.sqrt(binsize.map(function(d) {
-                return Math.pow(d, 2);
-            }).reduce(function(a, b) {
-                return a + b;
-            }, 0));
+            camera.position.set(binsize[0]*1.2, binsize[1]*1.2, binsize[2]*1.2);
             scene.userData.camera = camera;
 
             var controls = new THREE.OrbitControls(scene.userData.camera, scene.userData.element);
